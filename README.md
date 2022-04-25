@@ -13,7 +13,3 @@ In the project directory, you can run:
 ### `python training_models.py all`
 
 **Note**: Run line in src/models
-
-### `python training_models.py all`
-
-**Note**: Run line in src/models
