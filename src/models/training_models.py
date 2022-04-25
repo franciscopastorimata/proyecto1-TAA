@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -6,6 +7,7 @@ from xgboost import XGBClassifier
 import pickle
 
 OUTPUT_MODELS_PATH = "./trained-models"
+os.makedirs(OUTPUT_MODELS_PATH, exist_ok=True)
 
 def save_trained_desicion_tree(X_train, y_train):
     dt_clf = DecisionTreeClassifier()

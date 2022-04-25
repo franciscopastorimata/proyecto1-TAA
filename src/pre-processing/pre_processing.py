@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 import pandas as pd
 from sklearn.pipeline import Pipeline
@@ -7,6 +8,7 @@ from sklearn.compose import ColumnTransformer
 
 INPUT_DATA_PATH = "../../data/input"
 OUTPUT_DATA_PATH = "../../data/output"
+os.makedirs(OUTPUT_DATA_PATH, exist_ok=True)
 
 def map_s_and_b_values(data):
     data['Label'] = data['Label'].map({'b': 0, 's': 1})
