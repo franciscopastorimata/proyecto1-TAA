@@ -23,7 +23,7 @@ def change_999values_to_NaN(data):
     return data    
 
 def drop_unused_columns(data):
-    return data.drop(columns=["EventId", "Weight", "Label", "DER_mass_MMC", "PRI_jet_leading_pt", "PRI_jet_leading_eta", "PRI_jet_leading_phi", 
+    return data.drop(columns=["EventId", "DER_mass_MMC", "PRI_jet_leading_pt", "PRI_jet_leading_eta", "PRI_jet_leading_phi", 
     "PRI_jet_subleading_pt", "PRI_jet_subleading_eta", "PRI_jet_subleading_phi", "DER_sum_pt", "PRI_met_sumet", "DER_deltaeta_jet_jet"])
 
 def change_Nan_values_by_the_mean(data):
@@ -49,11 +49,13 @@ if __name__ == '__main__':
         elif  input_file_name == 'random_submission.csv':
             X_file_name, y_file_name = 'X_test.txt', 'y_test.txt'
     data = pd.read_csv(f"{INPUT_DATA_PATH}/{input_file_name}")
-    data = map_s_and_b_values(data)
+    if input_file_name == 'training.csv':
+        data = map_s_and_b_values(data)
+        y = get_target(data)
+        np.savetxt(f"{OUTPUT_DATA_PATH}/{y_file_name}", y, fmt='%d')
+        data = data.drop(columns=["Weight", "Label"])
     data = change_999values_to_NaN(data)
-    y = get_target(data)
     data = drop_unused_columns(data)
     X = change_Nan_values_by_the_mean(data)
     np.savetxt(f"{OUTPUT_DATA_PATH}/{X_file_name}", X)
-    np.savetxt(f"{OUTPUT_DATA_PATH}/{y_file_name}", y, fmt='%d')
     
