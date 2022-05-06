@@ -2,6 +2,12 @@
 
 **Note**: Activate conda & deactivate conda after use.
 
+# Install requirement libraries
+
+## pip install -r requirements.txt
+
+**Note**: Run line on project root
+
 ## Available Scripts
 
 In the project directory, you can run:
