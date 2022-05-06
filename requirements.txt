@@ -1,0 +1,10 @@
+###### Requirements without Version Specifiers ######
+comet-ml
+pandas
+numpy
+scikit-learn
+matplotlib
+xgboost
+os
+sys
+pickle
