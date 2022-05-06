@@ -44,9 +44,9 @@ if __name__ == '__main__':
             save_trained_xgboost(X_train, y_train, w_train)
             print('Se entrno un XGBoost.')
         elif model_to_train == 'all':
-            save_trained_desicion_tree(X_train, y_train)
-            save_trained_random_forest(X_train, y_train)
-            save_trained_xgboost(X_train, y_train)
+            save_trained_desicion_tree(X_train, y_train, w_train)
+            save_trained_random_forest(X_train, y_train, w_train)
+            save_trained_xgboost(X_train, y_train, w_train)
             print('Se entrnaron TODOS los modelos.')
         else:
             print('NO se entrno ningun modelo. Las opciones de modelos a entranr son: dt, rf, xbg, all')
