@@ -72,9 +72,9 @@ if __name__ == '__main__':
         exp = create_experiment()
         if model_to_train == 'rf':
             model = RandomForestClassifier()
-            rf_grid = {'n_estimators': [50],
-                            'min_samples_leaf': [1],
-                            'max_depth': [10],}
+            rf_grid = {'n_estimators': [50, 100, 200, 300,  400],
+                            'min_samples_leaf': [5, 10, 20],
+                            'max_depth': [5, 10, 20, 30, 40, 50]}
             best_scores, best_params = AMSGridSearchCV(model, param_grid=rf_grid, cv=3, X=X_train, y=y_train, weights=weights)
             log_experiment(exp, params=rf_grid, metrics=np.mean(best_scores))
             log_experiment(exp, best_params=best_params)
