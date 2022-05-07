@@ -29,8 +29,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:
         print('NO se entreno ningun modelo.')
     else:
-        data_training = pd.read_csv('../../data/input/training.csv')
-        w_train = np.array(data_training['Weight'])
+        w_train = np.loadtxt("../../data/output/w_train.txt")
         X_train = np.loadtxt("../../data/output/X_train.txt")
         y_train = np.loadtxt("../../data/output/y_train.txt")
         model_to_train = sys.argv[1]

@@ -43,16 +43,16 @@ if __name__ == '__main__':
     else:
         input_file_name = sys.argv[1]
         if input_file_name == 'training.csv':
-            X_file_name, y_file_name = 'X_train.txt', 'y_train.txt'
+            X_file_name, y_file_name, w_file_name = 'X_train.txt', 'y_train.txt', 'w_train.txt'
         elif input_file_name == 'test.csv':
-            X_file_name, y_file_name = 'X_test.txt', 'y_test.txt'
-        elif  input_file_name == 'random_submission.csv':
             X_file_name, y_file_name = 'X_test.txt', 'y_test.txt'
     data = pd.read_csv(f"{INPUT_DATA_PATH}/{input_file_name}")
     if input_file_name == 'training.csv':
         data = map_s_and_b_values(data)
         y = get_target(data)
         np.savetxt(f"{OUTPUT_DATA_PATH}/{y_file_name}", y, fmt='%d')
+        w = np.array(data['Weight'])
+        np.savetxt(f"{OUTPUT_DATA_PATH}/{w_file_name}", w)
         data = data.drop(columns=["Weight", "Label"])
     data = change_999values_to_NaN(data)
     data = drop_unused_columns(data)

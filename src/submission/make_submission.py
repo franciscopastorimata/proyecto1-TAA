@@ -2,6 +2,7 @@ import os
 import sys
 import numpy as np
 import pandas as pd
+from tensorflow import keras
 
 sys.path.append("../../utils")
 from HiggsBosonUtils import check_submission
@@ -35,7 +36,10 @@ if __name__ == '__main__':
         submission_name = sys.argv[2]
         df_test = pd.read_csv(f'{INPUT_RAW_DATA_PATH}/test.csv')
         X_test = np.loadtxt(f"{INPUT_DATA_PATH}/X_test.txt")
-        model_clf = pickle.load(open(f"{INPUT_MODELS_PATH}/{model_name}.sav", 'rb'))
-        create_submission(submission_name, model_clf.predict(X_test), model_clf.predict_proba(X_test), df_test['EventId'])
+        if 'nn' in model_name:
+            model = keras.models.load_model("../models/nn.h5")
+        else:
+            model = pickle.load(open(f"{INPUT_MODELS_PATH}/{model_name}.sav", 'rb'))
+        create_submission(submission_name, model.predict(X_test), model.predict_proba(X_test), df_test['EventId'])
         print('the submission file has been successfully created')
         
