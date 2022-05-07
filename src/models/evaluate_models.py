@@ -84,7 +84,16 @@ if __name__ == '__main__':
             print('best_params: ', best_params)
         elif model_to_train == 'xgb':
             model = XGBClassifier()
-            print('Se entrno un XGBoost.')
+            xgb_grid = {'n_estimators': [50, 200, 400],
+                            'learning_rate': [10 ** i for i in range(-3, 0)],
+	                        'max_depth': [50, 100, 250]}
+            best_scores, best_params = AMSGridSearchCV(model, param_grid=xgb_grid, cv=3, X=X_train, y=y_train, weights=weights)
+            log_experiment(exp, params=xgb_grid, metrics=np.mean(best_scores))
+            log_experiment(exp, best_params=best_params)
+            plot_cv_scores(exp, best_scores)
+            print('Se entreno un XGBoost.')
+            print('best_scores: ', np.mean(best_scores))
+            print('best_params: ', best_params)
         else:
             print('NO se entrno ningun modelo. Las opciones de modelos a entranr son: rf, xbg')
 
