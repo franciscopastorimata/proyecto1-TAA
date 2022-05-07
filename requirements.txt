@@ -5,6 +5,7 @@ numpy
 scikit-learn
 matplotlib
 xgboost
-os
-sys
-pickle
+os-sys
+syspath
+pickle5
+python-dotenv
