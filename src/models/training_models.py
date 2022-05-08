@@ -16,7 +16,7 @@ def save_trained_desicion_tree(X_train, y_train, w_train):
     pickle.dump(dt_clf, open(f"{OUTPUT_MODELS_PATH}/dt.sav", 'wb'))
 
 def save_trained_random_forest(X_train, y_train, w_train):
-    rf_clf = RandomForestClassifier()
+    rf_clf = RandomForestClassifier(n_estimators= 600,min_samples_leaf=5,max_depth=100, random_state=42)
     rf_clf.fit(X_train, y_train, sample_weight = w_train)
     pickle.dump(rf_clf, open(f"{OUTPUT_MODELS_PATH}/rf.sav", 'wb'))
 
