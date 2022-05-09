@@ -25,7 +25,7 @@ def change_999values_to_NaN(data):
 def drop_unused_columns(data):
     return data.drop(columns=["EventId", "PRI_jet_leading_eta", "PRI_jet_leading_phi", 
     "PRI_jet_subleading_eta", "PRI_jet_subleading_phi", "DER_sum_pt", "PRI_met_sumet", "DER_deltaeta_jet_jet",
-    "PRI_met_phi", "PRI_lep_phi", "PRI_lep_eta", "PRI_tau_eta", "PRI_tau_phi"])
+    "PRI_met_phi", "PRI_lep_phi", "PRI_lep_eta", "PRI_tau_eta", "PRI_tau_phi", 'DER_lep_eta_centrality', 'DER_mass_jet_jet', 'DER_prodeta_jet_jet'])
 
 def change_Nan_values_by_the_mean(data):
     # this function recives a pandas data frame and returns two numpy arrays
