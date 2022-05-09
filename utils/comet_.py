@@ -9,7 +9,7 @@ def create_experiment(tags=None):
     """ Crea el experimento con los tags pasados como variable y lo devuelve."""
     experiment = Experiment(
         api_key=os.getenv('COMET_API_KEY'),
-        project_name="general",
+        project_name="proyecto1-grupof",
         workspace=os.getenv('COMET_WORKSPACE'),
         auto_param_logging=False,
     )

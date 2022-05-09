@@ -50,11 +50,14 @@ def AMSGridSearchCV(model, param_grid, cv, X, y, weights):
             y_pred = model.predict(X_val)
             s, b = get_signal_background(y_val, y_pred, weights_val)
             score.append(AMS(s, b))
-        print(f'{score}, {g}\n\n')
+        print(f'{score}, {g}')
         mean_score = np.mean(score)
-        if mean_score > best_score:
+        print(f'mean score: {mean_score} / best score: {best_score}\n\n')
+        if (mean_score > best_score):
+            best_score = mean_score
             best_scores = score
             best_params = g
+    
     return best_scores, best_params
 
 if __name__ == '__main__':
@@ -72,9 +75,9 @@ if __name__ == '__main__':
         exp = create_experiment()
         if model_to_train == 'rf':
             model = RandomForestClassifier()
-            rf_grid = {'n_estimators': [50, 100, 200, 300,  400],
+            rf_grid = {'n_estimators': [50, 200, 400],
                             'min_samples_leaf': [5, 10, 20],
-                            'max_depth': [5, 10, 20, 30, 40, 50]}
+                            'max_depth': [5, 20, 50]}
             best_scores, best_params = AMSGridSearchCV(model, param_grid=rf_grid, cv=3, X=X_train, y=y_train, weights=weights)
             log_experiment(exp, params=rf_grid, metrics=np.mean(best_scores))
             log_experiment(exp, best_params=best_params)
@@ -84,9 +87,9 @@ if __name__ == '__main__':
             print('best_params: ', best_params)
         elif model_to_train == 'xgb':
             model = XGBClassifier()
-            xgb_grid = {'n_estimators': [50, 200, 400],
-                            'learning_rate': [10 ** i for i in range(-3, 0)],
-	                        'max_depth': [50, 100, 250]}
+            xgb_grid = {'n_estimators': [400, 600],
+                            'learning_rate': [10 ** i for i in range(-1, 2)],
+	                        'max_depth': [100, 200, 300, 400, 500]}
             best_scores, best_params = AMSGridSearchCV(model, param_grid=xgb_grid, cv=3, X=X_train, y=y_train, weights=weights)
             log_experiment(exp, params=xgb_grid, metrics=np.mean(best_scores))
             log_experiment(exp, best_params=best_params)
