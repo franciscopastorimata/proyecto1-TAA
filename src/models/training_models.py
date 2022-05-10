@@ -21,7 +21,7 @@ def save_trained_random_forest(X_train, y_train, w_train):
     pickle.dump(rf_clf, open(f"{OUTPUT_MODELS_PATH}/rf.sav", 'wb'))
 
 def save_trained_xgboost(X_train, y_train, w_train):
-    xgb_clf = XGBClassifier(learning_rate=0.1, max_depth=200, n_estimators=400, random_state=42)
+    xgb_clf = XGBClassifier(learning_rate=0.1, max_depth=50, n_estimators=600, random_state=42)
     xgb_clf.fit(X_train, y_train, sample_weight = w_train)
     pickle.dump(xgb_clf, open(f"{OUTPUT_MODELS_PATH}/xgb.sav", 'wb'))
 

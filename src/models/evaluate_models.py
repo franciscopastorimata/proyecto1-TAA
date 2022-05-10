@@ -87,9 +87,9 @@ if __name__ == '__main__':
             print('best_params: ', best_params)
         elif model_to_train == 'xgb':
             model = XGBClassifier()
-            xgb_grid = {'n_estimators': [400, 600],
-                            'learning_rate': [10 ** i for i in range(-1, 2)],
-	                        'max_depth': [100, 200, 300, 400, 500]}
+            xgb_grid = {'n_estimators': [600],
+                            'learning_rate': [0.1],
+	                        'max_depth': [20, 50, 100]}
             best_scores, best_params = AMSGridSearchCV(model, param_grid=xgb_grid, cv=3, X=X_train, y=y_train, weights=weights)
             log_experiment(exp, params=xgb_grid, metrics=np.mean(best_scores))
             log_experiment(exp, best_params=best_params)
